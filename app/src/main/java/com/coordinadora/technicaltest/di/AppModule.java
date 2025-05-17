@@ -2,6 +2,10 @@ package com.coordinadora.technicaltest.di;
 
 import android.content.Context;
 
+import com.coordinadora.technicaltest.domain.usecase.ValidateUserUseCase;
+import com.coordinadora.technicaltest.repository.UserRepository;
+import com.coordinadora.technicaltest.repository.UserRepositoryImpl;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -20,5 +24,17 @@ public class AppModule {
     @Provides
     Context provideContext() {
         return appContext;
+    }
+
+    @Singleton
+    @Provides
+    UserRepository provideUserRepository(UserRepositoryImpl repo) {
+        return repo;
+    }
+
+    @Singleton
+    @Provides
+    ValidateUserUseCase provideValidateUserUseCase(UserRepository repository) {
+        return new ValidateUserUseCase(repository);
     }
 }

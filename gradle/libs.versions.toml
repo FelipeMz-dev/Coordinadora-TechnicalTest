@@ -10,6 +10,8 @@ constraintlayout = "2.2.1"
 dagger2 = "2.50"
 lifecycle = "2.9.0"
 recyclerview = "1.4.0"
+rxJava = "3.1.6"
+rxAndroid = "3.0.2"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -23,6 +25,8 @@ recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger2" }
 dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger2" }
+rxJava = { group = "io.reactivex.rxjava3", name = "rxjava", version.ref = "rxJava" }
+rxAndroid = { group = "io.reactivex.rxjava3", name = "rxandroid", version.ref = "rxAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
