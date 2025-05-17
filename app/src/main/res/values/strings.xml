@@ -3,4 +3,10 @@
     <string name="copy_user">User</string>
     <string name="copy_password">Password</string>
     <string name="login">Login</string>
+    <string name="copy_unexpected_network_error">Unexpected network error</string>
+    <string name="copy_no_internet_connection">No internet connection</string>
+    <string name="copy_timeout_error">Timeout error</string>
+    <string name="copy_unknown_error_json">Unknown error (JSON)</string>
+    <string name="copy_required_field">Required field</string>
+    <string name="copy_incorrect_username_or_password">Incorrect username or password</string>
 </resources>

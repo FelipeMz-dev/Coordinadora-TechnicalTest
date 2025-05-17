@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.coordinadora.technicaltest.domain.usecase.ValidateUserUseCase;
+import com.coordinadora.technicaltest.util.ResponseState;
 
 import javax.inject.Inject;
 
@@ -16,7 +17,7 @@ public class LoginViewModel extends ViewModel {
 
     private final ValidateUserUseCase validateUserUseCase;
     private final CompositeDisposable disposables = new CompositeDisposable();
-    private final MutableLiveData<Boolean> loginResult = new MutableLiveData<>();
+    private final MutableLiveData<ResponseState<Boolean>> loginResult = new MutableLiveData<>();
 
     @Inject
     public LoginViewModel(ValidateUserUseCase validateUserUseCase) {
@@ -24,18 +25,20 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void validateUser(String username, String password) {
+        loginResult.setValue(ResponseState.loading());
+
         disposables.add(
                 validateUserUseCase.execute(username, password)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
-                                loginResult::setValue,
-                                throwable -> loginResult.setValue(false)
+                                isValid -> loginResult.setValue(ResponseState.success(isValid)),
+                                throwable -> loginResult.setValue(ResponseState.error(throwable.getMessage()))
                         )
         );
     }
 
-    public LiveData<Boolean> getLoginResult() {
+    public LiveData<ResponseState<Boolean>> getLoginResult() {
         return loginResult;
     }
 

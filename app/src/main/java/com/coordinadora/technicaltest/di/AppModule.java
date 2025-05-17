@@ -3,6 +3,7 @@ package com.coordinadora.technicaltest.di;
 import android.content.Context;
 
 import com.coordinadora.technicaltest.domain.usecase.ValidateUserUseCase;
+import com.coordinadora.technicaltest.network.LoginService;
 import com.coordinadora.technicaltest.repository.UserRepository;
 import com.coordinadora.technicaltest.repository.UserRepositoryImpl;
 
@@ -24,6 +25,12 @@ public class AppModule {
     @Provides
     Context provideContext() {
         return appContext;
+    }
+
+    @Singleton
+    @Provides
+    LoginService provideLoginService(Context context) {
+        return new LoginService(context);
     }
 
     @Singleton

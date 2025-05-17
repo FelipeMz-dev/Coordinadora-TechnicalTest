@@ -45,6 +45,7 @@ dependencies {
     annotationProcessor libs.dagger.compiler
     implementation libs.rxJava
     implementation libs.rxAndroid
+    implementation libs.volley
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
