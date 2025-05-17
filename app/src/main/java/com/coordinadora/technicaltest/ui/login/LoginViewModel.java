@@ -1,19 +1,19 @@
 package com.coordinadora.technicaltest.ui.login;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.coordinadora.technicaltest.domain.usecase.ValidateUserUseCase;
+import com.coordinadora.technicaltest.ui.common.BaseViewModel;
 import com.coordinadora.technicaltest.util.ResponseState;
 
 import javax.inject.Inject;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class LoginViewModel extends ViewModel {
+public class LoginViewModel extends BaseViewModel {
 
     private final ValidateUserUseCase validateUserUseCase;
     private final CompositeDisposable disposables = new CompositeDisposable();
@@ -24,13 +24,18 @@ public class LoginViewModel extends ViewModel {
         this.validateUserUseCase = validateUserUseCase;
     }
 
+    public LoginViewModel(ValidateUserUseCase validateUserUseCase, Scheduler mainScheduler) {
+        super(mainScheduler);
+        this.validateUserUseCase = validateUserUseCase;
+    }
+
     public void validateUser(String username, String password) {
         loginResult.setValue(ResponseState.loading());
 
         disposables.add(
                 validateUserUseCase.execute(username, password)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(ioScheduler)
+                        .observeOn(mainScheduler)
                         .subscribe(
                                 isValid -> loginResult.setValue(ResponseState.success(isValid)),
                                 throwable -> loginResult.setValue(ResponseState.error(throwable.getMessage()))

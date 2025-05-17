@@ -11,6 +11,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.rxjava3.core.Single;
 
 @Module
 public class AppModule {
@@ -42,6 +43,6 @@ public class AppModule {
     @Singleton
     @Provides
     ValidateUserUseCase provideValidateUserUseCase(UserRepository repository) {
-        return new ValidateUserUseCase(repository);
+        return repository::validateCredentials;
     }
 }

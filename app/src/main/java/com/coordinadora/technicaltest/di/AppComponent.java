@@ -7,9 +7,15 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 
+@Component(
+        modules = {
+                AppModule.class,
+                ViewModelModule.class,
+        }
+)
 @Singleton
-@Component(modules = {AppModule.class})
 public interface AppComponent {
     void inject(MainActivity activity);
+
     void inject(LoginActivity activity);
 }

@@ -47,6 +47,11 @@ dependencies {
     implementation libs.rxAndroid
     implementation libs.volley
     testImplementation libs.junit
+    testImplementation libs.mockito.core
+    testImplementation libs.mockito.inline
+    testImplementation libs.kotlinx.coroutines.test
+    testImplementation libs.rxJava
+    testImplementation libs.core.testing
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
 }
