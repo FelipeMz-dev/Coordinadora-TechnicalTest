@@ -6,7 +6,7 @@ import com.coordinadora.technicaltest.di.AppComponent;
 import com.coordinadora.technicaltest.di.AppModule;
 import com.coordinadora.technicaltest.di.DaggerAppComponent;
 
-public class application extends Application {
+public class App extends Application {
     private AppComponent appComponent;
 
     @Override
@@ -20,4 +20,5 @@ public class application extends Application {
     public AppComponent getAppComponent() {
         return appComponent;
     }
+
 }
