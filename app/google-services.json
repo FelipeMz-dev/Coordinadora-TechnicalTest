@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "357904391470",
+    "project_id": "coordinadoratechnicaltest",
+    "storage_bucket": "coordinadoratechnicaltest.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:357904391470:android:8789eb666a92919fd5eebf",
+        "android_client_info": {
+          "package_name": "com.coordinadora.technicaltest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHh1TKpGXezJH9tWVJrHWyNQ0rPM1_DEA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
