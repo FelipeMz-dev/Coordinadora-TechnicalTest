@@ -1,4 +1,4 @@
-package com.coordinadora.technicaltest.network.query;
+package com.coordinadora.technicaltest.data.api.query;
 
 import org.json.JSONArray;
 import org.json.JSONException;

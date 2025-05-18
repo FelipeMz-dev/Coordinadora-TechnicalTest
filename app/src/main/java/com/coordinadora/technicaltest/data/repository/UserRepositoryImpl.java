@@ -1,6 +1,6 @@
-package com.coordinadora.technicaltest.repository;
+package com.coordinadora.technicaltest.data.repository;
 
-import com.coordinadora.technicaltest.network.LoginService;
+import com.coordinadora.technicaltest.data.api.LoginService;
 
 import javax.inject.Inject;
 

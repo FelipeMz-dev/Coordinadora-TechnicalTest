@@ -1,4 +1,4 @@
-package com.coordinadora.technicaltest.network;
+package com.coordinadora.technicaltest.data.api;
 
 public class ApiConstants {
     public static final String BASE_URL = "https://firestore.googleapis.com/v1/projects/coordinadoratechnicaltest/databases/(default)/";

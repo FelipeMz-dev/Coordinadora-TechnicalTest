@@ -1,11 +1,11 @@
-package com.coordinadora.technicaltest.network;
+package com.coordinadora.technicaltest.data.api;
 
 import android.content.Context;
 
 import com.android.volley.Request;
-import com.coordinadora.technicaltest.network.query.LoginQueryBuilder;
-import com.coordinadora.technicaltest.network.request.JsonObjectToArrayRequest;
-import com.coordinadora.technicaltest.util.ApiErrorHandler;
+import com.coordinadora.technicaltest.data.api.query.LoginQueryBuilder;
+import com.coordinadora.technicaltest.data.api.request.JsonObjectToArrayRequest;
+import com.coordinadora.technicaltest.common.util.ApiErrorHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,7 +40,7 @@ public class LoginService {
                                     break;
                                 }
                             } catch (JSONException e) {
-                                emitter.onError(e);
+                                emitter.tryOnError(e);
                                 return;
                             }
                         }
@@ -48,7 +48,7 @@ public class LoginService {
                     },
                     error -> {
                         String message = ApiErrorHandler.parseVolleyError(error, context);
-                        emitter.onError(new Exception(message));
+                        emitter.tryOnError(new Exception(message));
                     },
                     null
             );

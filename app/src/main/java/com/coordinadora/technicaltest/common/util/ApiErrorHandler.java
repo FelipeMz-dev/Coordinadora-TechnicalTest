@@ -1,4 +1,4 @@
-package com.coordinadora.technicaltest.util;
+package com.coordinadora.technicaltest.common.util;
 
 import android.content.Context;
 

@@ -9,9 +9,10 @@ import static org.mockito.Mockito.when;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.Observer;
 
+import com.coordinadora.technicaltest.common.scheduler.TestSchedulerProvider;
 import com.coordinadora.technicaltest.domain.usecase.ValidateUserUseCase;
 import com.coordinadora.technicaltest.ui.login.LoginViewModel;
-import com.coordinadora.technicaltest.util.ResponseState;
+import com.coordinadora.technicaltest.common.util.ResponseState;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -20,6 +21,7 @@ import org.mockito.ArgumentCaptor;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -34,16 +36,20 @@ public class LoginViewModelTest {
     @Before
     public void setUp() {
         mockUseCase = mock(ValidateUserUseCase.class);
-        viewModel = new LoginViewModel(mockUseCase, Schedulers.trampoline());
+        Scheduler testScheduler = Schedulers.trampoline();
+        viewModel = new LoginViewModel(
+                mockUseCase,
+                new TestSchedulerProvider(testScheduler)
+        );
     }
 
     @Test
-    public void login_successfulCredentials_shouldEmitSuccessTrue() {
+    public void validateUser_successfulLogin_shouldEmitLoadingThenSuccessTrue() {
         testLoginResult("testUser", "testPassword", true, true);
     }
 
     @Test
-    public void login_failedCredentials_shouldEmitSuccessFalse() {
+    public void validateUser_unsuccessfulLogin_shouldEmitLoadingThenSuccessFalse() {
         testLoginResult("testUser", "testPassword", false, false);
     }
 
@@ -64,6 +70,7 @@ public class LoginViewModelTest {
         assertEquals(ResponseState.Status.LOADING, values.get(0).status);
         assertEquals(ResponseState.Status.SUCCESS, values.get(1).status);
         assertEquals(expectedResult, values.get(1).data);
+        assertEquals(2, values.size());
     }
 
     @Test
@@ -87,5 +94,6 @@ public class LoginViewModelTest {
         assertEquals(ResponseState.Status.LOADING, values.get(0).status);
         assertEquals(ResponseState.Status.ERROR, values.get(1).status);
         assertEquals(errorMessage, values.get(1).message);
+        assertEquals(2, values.size());
     }
 }

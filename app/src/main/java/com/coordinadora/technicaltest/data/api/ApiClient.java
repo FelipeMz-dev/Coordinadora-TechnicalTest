@@ -1,4 +1,4 @@
-package com.coordinadora.technicaltest.network;
+package com.coordinadora.technicaltest.data.api;
 
 import android.content.Context;
 

@@ -2,16 +2,18 @@ package com.coordinadora.technicaltest.di;
 
 import android.content.Context;
 
+import com.coordinadora.technicaltest.common.scheduler.AppSchedulerProvider;
+import com.coordinadora.technicaltest.common.scheduler.SchedulerProvider;
 import com.coordinadora.technicaltest.domain.usecase.ValidateUserUseCase;
-import com.coordinadora.technicaltest.network.LoginService;
-import com.coordinadora.technicaltest.repository.UserRepository;
-import com.coordinadora.technicaltest.repository.UserRepositoryImpl;
+import com.coordinadora.technicaltest.domain.usecase.ValidateUserUseCaseImpl;
+import com.coordinadora.technicaltest.data.api.LoginService;
+import com.coordinadora.technicaltest.data.repository.UserRepository;
+import com.coordinadora.technicaltest.data.repository.UserRepositoryImpl;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import io.reactivex.rxjava3.core.Single;
 
 @Module
 public class AppModule {
@@ -43,6 +45,12 @@ public class AppModule {
     @Singleton
     @Provides
     ValidateUserUseCase provideValidateUserUseCase(UserRepository repository) {
-        return repository::validateCredentials;
+        return new ValidateUserUseCaseImpl(repository);
+    }
+
+    @Provides
+    @Singleton
+    SchedulerProvider provideSchedulerProvider() {
+        return new AppSchedulerProvider();
     }
 }

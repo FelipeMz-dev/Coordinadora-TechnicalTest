@@ -1,4 +1,4 @@
-package com.coordinadora.technicaltest.repository;
+package com.coordinadora.technicaltest.data.repository;
 
 import io.reactivex.rxjava3.core.Single;
 

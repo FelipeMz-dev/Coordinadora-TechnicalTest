@@ -10,10 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.coordinadora.technicaltest.App;
 import com.coordinadora.technicaltest.R;
 import com.coordinadora.technicaltest.databinding.ActivityLoginBinding;
-import com.coordinadora.technicaltest.ui.common.GenericViewModelFactory;
-import com.coordinadora.technicaltest.util.ResponseState;
-
-import java.util.Map;
+import com.coordinadora.technicaltest.common.util.ResponseState;
 
 import javax.inject.Inject;
 
@@ -26,11 +23,11 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ((App) getApplication()).getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        ((App) getApplication()).getAppComponent().inject(this);
         viewModel = new ViewModelProvider(this, viewModelFactory).get(LoginViewModel.class);
 
         onClickListener();

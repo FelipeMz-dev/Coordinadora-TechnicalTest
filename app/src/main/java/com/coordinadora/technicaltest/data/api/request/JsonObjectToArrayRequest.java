@@ -1,4 +1,4 @@
-package com.coordinadora.technicaltest.network.request;
+package com.coordinadora.technicaltest.data.api.request;
 
 import androidx.annotation.Nullable;
 
