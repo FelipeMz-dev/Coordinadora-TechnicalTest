@@ -2,7 +2,9 @@ name: Firebase App Distribution CI/CD
 
 on:
   workflow_run:
-    workflows: [ "Test", "Build" ]
+    workflows:
+        - Android CI/CD
+        - Tests CI/CD
     types:
       - completed
 
