@@ -2,29 +2,45 @@
 agp = "8.9.2"
 junit = "4.13.2"
 junitVersion = "1.2.1"
+mockito = "5.2.0"
+kotlinx-coroutines-test = "1.7.3"
+core-testing = "2.2.0"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.10.1"
 constraintlayout = "2.2.1"
 dagger2 = "2.50"
+lifecycle = "2.9.0"
+recyclerview = "1.4.0"
+rxJava = "3.1.6"
+rxAndroid = "3.0.2"
+volley = "1.2.1"
 googleServices = "4.4.2"
 firebase = "33.13.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
+mockito-inline = { group = "org.mockito", name = "mockito-inline", version.ref = "mockito" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
+core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "core-testing" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger2" }
 dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger2" }
+rxJava = { group = "io.reactivex.rxjava3", name = "rxjava", version.ref = "rxJava" }
+rxAndroid = { group = "io.reactivex.rxjava3", name = "rxandroid", version.ref = "rxAndroid" }
+volley = { group = "com.android.volley", name = "volley", version.ref = "volley" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
-
