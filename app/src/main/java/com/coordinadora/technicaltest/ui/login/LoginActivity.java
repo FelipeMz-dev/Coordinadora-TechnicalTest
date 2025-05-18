@@ -1,5 +1,6 @@
 package com.coordinadora.technicaltest.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -11,6 +12,7 @@ import com.coordinadora.technicaltest.App;
 import com.coordinadora.technicaltest.R;
 import com.coordinadora.technicaltest.databinding.ActivityLoginBinding;
 import com.coordinadora.technicaltest.common.util.ResponseState;
+import com.coordinadora.technicaltest.ui.main.MainActivity;
 
 import javax.inject.Inject;
 
@@ -64,8 +66,7 @@ public class LoginActivity extends AppCompatActivity {
             case SUCCESS:
                 binding.progressBar.setVisibility(View.GONE);
                 binding.buttonLogin.setEnabled(true);
-                if (result.data)
-                    Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                if (result.data) navigateToMainActivity();
                 else binding.textViewError.setVisibility(View.VISIBLE);
                 break;
             case ERROR:
@@ -74,5 +75,11 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    private void navigateToMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

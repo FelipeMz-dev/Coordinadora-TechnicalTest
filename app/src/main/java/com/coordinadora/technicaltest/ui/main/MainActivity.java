@@ -2,25 +2,51 @@ package com.coordinadora.technicaltest.ui.main;
 
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.coordinadora.technicaltest.R;
+import com.coordinadora.technicaltest.App;
+import com.coordinadora.technicaltest.databinding.ActivityMainBinding;
+
+import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity {
 
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
+    private MainViewModel viewModel;
+    private ActivityMainBinding binding;
+    private BackupAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ((App) getApplication()).getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        viewModel = new ViewModelProvider(this, viewModelFactory).get(MainViewModel.class);
+
+        initRecyclerView();
+        subscribeToViewModel();
+        onClickListener();
+    }
+
+    private void subscribeToViewModel() {
+        viewModel.backups.observe(this, adapter::submitList);
+    }
+
+    private void onClickListener() {
+        binding.cameraButton.setOnClickListener(v -> {});
+        binding.logoutButton.setOnClickListener(v -> {});
+    }
+
+    private void initRecyclerView() {
+        adapter = new BackupAdapter(item -> {
+            // Handle map click
         });
+        binding.backupRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.backupRecyclerView.setAdapter(adapter);
     }
 }
