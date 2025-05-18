@@ -1,6 +1,7 @@
 package com.coordinadora.technicaltest.ui.main;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -34,12 +35,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void subscribeToViewModel() {
-        viewModel.backups.observe(this, adapter::submitList);
+        viewModel.backups.observe(this, backups -> {
+            if (backups == null || backups.isEmpty())
+                binding.emptyState.setVisibility(View.VISIBLE);
+            else {
+                binding.emptyState.setVisibility(View.GONE);
+                adapter.submitList(backups);
+            }
+        });
     }
 
     private void onClickListener() {
-        binding.cameraButton.setOnClickListener(v -> {});
-        binding.logoutButton.setOnClickListener(v -> {});
+        binding.cameraButton.setOnClickListener(v -> {
+        });
+        binding.logoutButton.setOnClickListener(v -> {
+        });
     }
 
     private void initRecyclerView() {

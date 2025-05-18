@@ -11,4 +11,5 @@
     <string name="copy_incorrect_username_or_password">Incorrect username or password</string>
     <string name="copy_read_information">Read information</string>
     <string name="hint_manual_input">etiqueta1d-latitud-longitud-observacion</string>
+    <string name="copy_no_data_available">No data available</string>
 </resources>
