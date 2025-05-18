@@ -16,6 +16,8 @@ recyclerview = "1.4.0"
 rxJava = "3.1.6"
 rxAndroid = "3.0.2"
 volley = "1.2.1"
+googleServices = "4.4.2"
+firebase = "33.13.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -36,6 +38,9 @@ dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", versi
 rxJava = { group = "io.reactivex.rxjava3", name = "rxjava", version.ref = "rxJava" }
 rxAndroid = { group = "io.reactivex.rxjava3", name = "rxandroid", version.ref = "rxAndroid" }
 volley = { group = "com.android.volley", name = "volley", version.ref = "volley" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
