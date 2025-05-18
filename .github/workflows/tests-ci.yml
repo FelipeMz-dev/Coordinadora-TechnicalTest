@@ -19,7 +19,3 @@ jobs:
 
       - name: Unit Test
         run: ./gradlew testDebugUnitTest
-
-      - name: Test report
-        uses: asadmansr/android-test-action@v1.2.0
-        if: ${{ always() }}
