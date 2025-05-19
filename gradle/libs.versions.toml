@@ -18,6 +18,7 @@ rxAndroid = "3.0.2"
 volley = "1.2.1"
 googleServices = "4.4.2"
 firebase = "33.13.0"
+room = "2.7.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -40,6 +41,9 @@ rxAndroid = { group = "io.reactivex.rxjava3", name = "rxandroid", version.ref = 
 volley = { group = "com.android.volley", name = "volley", version.ref = "volley" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-rxjava3 = { group = "androidx.room", name = "room-rxjava3", version.ref = "room" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
