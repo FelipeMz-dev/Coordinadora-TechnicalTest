@@ -1,5 +1,8 @@
 package com.coordinadora.technicaltest.data.api.service;
 
+import static com.coordinadora.technicaltest.common.util.JsonParserUtil.buildFirestoreQueryBySerial;
+import static com.coordinadora.technicaltest.common.util.JsonParserUtil.createFirestoreDocument;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -46,23 +49,8 @@ public class BackupRemoteService {
             String serial = DeviceUtils.getSerial();
             String date = DateUtils.getTodayDateFormatted();
 
-            JSONArray dataArray = new JSONArray();
-            for (BackupEntity entity : localData) {
-                JSONObject obj = new JSONObject();
-                obj.put("etiqueta1d", entity.etiqueta1d);
-                obj.put("latitud", entity.latitud);
-                obj.put("longitud", entity.longitud);
-                obj.put("observacion", entity.observacion);
-                dataArray.put(obj);
-            }
 
-            JSONObject documentFields = new JSONObject();
-            documentFields.put("serial", new JSONObject().put("stringValue", serial));
-            documentFields.put("date", new JSONObject().put("stringValue", date));
-            documentFields.put("data", new JSONObject().put("arrayValue", new JSONObject()
-                    .put("values", dataArrayToFirestoreValues(dataArray))));
-
-            JSONObject document = new JSONObject().put("fields", documentFields);
+            JSONObject document = createFirestoreDocument(serial, date, localData);
 
             String url = ApiConstants.FIREBASE_URL + "documents/backup";
 
@@ -75,25 +63,6 @@ public class BackupRemoteService {
 
             ApiClient.getInstance(context).add(request);
         });
-    }
-
-    private JSONArray dataArrayToFirestoreValues(JSONArray datosArray) throws JSONException {
-        JSONArray values = new JSONArray();
-        for (int i = 0; i < datosArray.length(); i++) {
-            JSONObject item = datosArray.getJSONObject(i);
-
-            JSONObject firestoreMap = new JSONObject();
-            firestoreMap.put("mapValue", new JSONObject()
-                    .put("fields", new JSONObject()
-                            .put("etiqueta1d", new JSONObject().put("stringValue", item.getString("etiqueta1d")))
-                            .put("latitud", new JSONObject().put("doubleValue", item.getDouble("latitud")))
-                            .put("longitud", new JSONObject().put("doubleValue", item.getDouble("longitud")))
-                            .put("observacion", new JSONObject().put("stringValue", item.getString("observacion")))
-                    ));
-
-            values.put(firestoreMap);
-        }
-        return values;
     }
 
     public Completable loadBackups() {
@@ -130,7 +99,7 @@ public class BackupRemoteService {
                             JSONObject object = documents.getJSONObject(i);
                             JSONObject document = object.getJSONObject("document");
                             String fullPath = document.getString("name");
-                            String deleteUrl = "https://firestore.googleapis.com/v1/" + fullPath;
+                            String deleteUrl = ApiConstants.FIREBASE_URL_SHORT + fullPath;
 
                             Log.println(Log.DEBUG, "DELETE", deleteUrl);
 
@@ -164,19 +133,8 @@ public class BackupRemoteService {
             String serial = DeviceUtils.getSerial();
             String url = ApiConstants.FIREBASE_URL + ApiConstants.DOCUMENTS_QUERY;
 
-            JSONObject query = new JSONObject();
-            JSONObject fieldFilter = new JSONObject()
-                    .put("field", new JSONObject().put("fieldPath", "serial"))
-                    .put("op", "EQUAL")
-                    .put("value", new JSONObject().put("stringValue", serial));
 
-            JSONObject where = new JSONObject().put("fieldFilter", fieldFilter);
-            JSONObject from = new JSONObject().put("collectionId", "backup");
-            JSONObject structuredQuery = new JSONObject()
-                    .put("from", new JSONArray().put(from))
-                    .put("where", where);
-
-            query.put("structuredQuery", structuredQuery);
+            JSONObject query = buildFirestoreQueryBySerial(serial);
 
             JsonObjectToArrayRequest request = new JsonObjectToArrayRequest(Request.Method.POST, url, query,
                     emitter::onSuccess,
