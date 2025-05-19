@@ -61,6 +61,7 @@ dependencies {
     implementation libs.zxing
     //maps
     implementation libs.googleMaps
+    implementation libs.googleLocation
     //Test
     testImplementation libs.junit
     testImplementation libs.mockito.core

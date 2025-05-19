@@ -24,6 +24,7 @@ import com.coordinadora.technicaltest.common.util.ResponseState;
 import com.coordinadora.technicaltest.databinding.ActivityMainBinding;
 import com.coordinadora.technicaltest.model.Backup;
 import com.coordinadora.technicaltest.ui.login.LoginActivity;
+import com.coordinadora.technicaltest.ui.map.MapActivity;
 
 import java.util.List;
 
@@ -52,9 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initRecyclerView() {
-        adapter = new BackupAdapter(item -> {
-            // Handle map click
-        });
+        adapter = new BackupAdapter(this::goToMap);
         binding.backupRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.backupRecyclerView.setAdapter(adapter);
     }
@@ -131,6 +130,14 @@ public class MainActivity extends AppCompatActivity {
     private void goToLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void goToMap(Backup item) {
+        Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra(MapActivity.LATITUDE_KEY, item.latitud);
+        intent.putExtra(MapActivity.LONGITUDE_KEY, item.longitud);
+        intent.putExtra(MapActivity.OBSERVATION_KEY, item.observacion);
         startActivity(intent);
     }
 

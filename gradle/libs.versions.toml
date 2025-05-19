@@ -21,6 +21,7 @@ firebase = "33.13.0"
 room = "2.7.1"
 zxing = "4.3.0"
 googleMaps = "18.2.0"
+googleLocation = "21.0.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -48,6 +49,7 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 room-rxjava3 = { group = "androidx.room", name = "room-rxjava3", version.ref = "room" }
 zxing = { group = "com.journeyapps", name = "zxing-android-embedded", version.ref = "zxing" }
 googleMaps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "googleMaps" }
+googleLocation = { group = "com.google.android.gms", name = "play-services-location", version.ref = "googleLocation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
