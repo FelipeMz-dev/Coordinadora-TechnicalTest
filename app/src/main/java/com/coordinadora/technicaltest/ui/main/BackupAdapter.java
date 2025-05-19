@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.coordinadora.technicaltest.databinding.ItemBackupBinding;
-import com.coordinadora.technicaltest.model.BackupEntity;
+import com.coordinadora.technicaltest.model.Backup;
 
-public class BackupAdapter extends ListAdapter<BackupEntity, BackupAdapter.ViewHolder> {
+public class BackupAdapter extends ListAdapter<Backup, BackupAdapter.ViewHolder> {
 
     public interface OnMapClickListener {
-        void onMapClick(BackupEntity item);
+        void onMapClick(Backup item);
     }
 
     private final OnMapClickListener mapClickListener;
@@ -21,12 +21,12 @@ public class BackupAdapter extends ListAdapter<BackupEntity, BackupAdapter.ViewH
     public BackupAdapter(OnMapClickListener listener) {
         super(new DiffUtil.ItemCallback<>() {
             @Override
-            public boolean areItemsTheSame(BackupEntity oldItem, BackupEntity newItem) {
+            public boolean areItemsTheSame(Backup oldItem, Backup newItem) {
                 return oldItem.id == newItem.id;
             }
 
             @Override
-            public boolean areContentsTheSame(BackupEntity oldItem, BackupEntity newItem) {
+            public boolean areContentsTheSame(Backup oldItem, Backup newItem) {
                 return oldItem.equals(newItem);
             }
         });
@@ -52,7 +52,7 @@ public class BackupAdapter extends ListAdapter<BackupEntity, BackupAdapter.ViewH
             this.binding = binding;
         }
 
-        void bind(BackupEntity item) {
+        void bind(Backup item) {
             binding.labelText.setText("etiqueta1d: " + item.etiqueta1d);
             binding.observationText.setText("Observación: " + item.observacion);
             binding.mapIcon.setOnClickListener(v -> mapClickListener.onMapClick(item));

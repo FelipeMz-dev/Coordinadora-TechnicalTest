@@ -12,4 +12,6 @@
     <string name="copy_read_information">Read information</string>
     <string name="hint_manual_input">etiqueta1d-latitud-longitud-observacion</string>
     <string name="copy_no_data_available">No data available</string>
+    <string name="copy_input_processed_successfully">Input processed successfully</string>
+    <string name="copy_logged_out_successfully">Logged out successfully</string>
 </resources>
