@@ -59,6 +59,8 @@ dependencies {
     implementation libs.room.rxjava3
     //Qr
     implementation libs.zxing
+    //maps
+    implementation libs.googleMaps
     //Test
     testImplementation libs.junit
     testImplementation libs.mockito.core

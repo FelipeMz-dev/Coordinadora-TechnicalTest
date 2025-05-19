@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
@@ -18,7 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.coordinadora.technicaltest.App;
-import com.coordinadora.technicaltest.QrScannerFragment;
+import com.coordinadora.technicaltest.ui.login.scanner.QrScannerFragment;
 import com.coordinadora.technicaltest.R;
 import com.coordinadora.technicaltest.common.util.LiveDataUtils;
 import com.coordinadora.technicaltest.common.util.ResponseState;
