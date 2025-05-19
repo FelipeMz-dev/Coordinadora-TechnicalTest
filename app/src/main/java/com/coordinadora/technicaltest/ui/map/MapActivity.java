@@ -71,7 +71,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
         verifyGPSAndLocation();
     }
@@ -92,10 +92,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         try {
                             ((ResolvableApiException) e).startResolutionForResult(this, REQUEST_CHECK_SETTINGS);
                         } catch (IntentSender.SendIntentException ex) {
-                            Toast.makeText(this, "Error al activar GPS", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, getString(R.string.error_activate_gps), Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(this, "Ubicación no disponible", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.copy_location_unavailable), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -116,7 +116,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                         != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "Se requiere permiso de ubicación", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.copy_require_location_permission, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -125,7 +125,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     if (location != null) {
                         showInMap(location);
                     } else {
-                        // Ubicación no disponible → solicita activamente una
                         LocationRequest locationRequest = LocationRequest.create()
                                 .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
                                 .setInterval(1000)
@@ -142,7 +141,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             Location location = locationResult.getLastLocation();
             if (location != null) {
                 showInMap(location);
-                // Detén después de obtener una sola ubicación
                 fusedLocationClient.removeLocationUpdates(this);
             }
         }
@@ -150,13 +148,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private void showInMap(Location location) {
         LatLng actual = new LatLng(location.getLatitude(), location.getLongitude());
-        LatLng destino = new LatLng(destinationLat, destinationLng);
+        LatLng destination = new LatLng(destinationLat, destinationLng);
 
-        mMap.addMarker(new MarkerOptions().position(actual).title("Ubicación actual"));
-        mMap.addMarker(new MarkerOptions().position(destino).title("Destino").snippet(observation));
+        mMap.addMarker(new MarkerOptions().position(actual).title(getString(R.string.copy_actual_location)));
+        mMap.addMarker(new MarkerOptions().position(destination).title(getString(R.string.copy_destination)).snippet(observation));
 
         mMap.addPolyline(new PolylineOptions()
-                .add(actual, destino)
+                .add(actual, destination)
                 .width(6f)
                 .color(Color.BLUE));
 
@@ -171,7 +169,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             if (resultCode == RESULT_OK) {
                 verifyPermissions();
             } else {
-                Toast.makeText(this, "La ubicación está desactivada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.copy_actual_location_disabled), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -186,7 +184,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             showLocation();
         } else {
-            Toast.makeText(this, "Se necesita permiso de ubicación", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.copy_need_location_permission), Toast.LENGTH_SHORT).show();
         }
     }
 }
