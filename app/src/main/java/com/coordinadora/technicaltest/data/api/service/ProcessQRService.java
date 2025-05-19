@@ -38,24 +38,11 @@ public class ProcessQRService {
             CompositeDisposable disposables = new CompositeDisposable();
             emitter.setCancellable(disposables::clear);
 
-            String data1 = "etiqueta1d:720024556544001-latitud:6.74444-longitud:-75.45454-observacion:prueba";
-            String base64 = Base64.encodeToString(data1.getBytes(), Base64.NO_WRAP);
+            String base64 = Base64.encodeToString(rawInput.getBytes(), Base64.NO_WRAP);
 
             JSONObject body = new JSONObject();
             body.put("data", base64);
 
-            try {
-                BackupEntity entity = DataParserUtils.parseBackupEntityFromRaw(data1);
-                disposables.add(
-                        dao.insert(entity)
-                                .subscribeOn(Schedulers.io())
-                                .subscribe(emitter::onComplete, emitter::tryOnError)
-                );
-            } catch (Exception ex) {
-                emitter.tryOnError(ex);
-            }
-
-            if (true) return;
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
                     ApiConstants.VALIDATE_QR_ENDPOINT, body,
                     response -> {

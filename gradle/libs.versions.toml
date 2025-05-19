@@ -19,6 +19,7 @@ volley = "1.2.1"
 googleServices = "4.4.2"
 firebase = "33.13.0"
 room = "2.7.1"
+zxing = "4.3.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -44,6 +45,7 @@ firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-rxjava3 = { group = "androidx.room", name = "room-rxjava3", version.ref = "room" }
+zxing = { group = "com.journeyapps", name = "zxing-android-embedded", version.ref = "zxing" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

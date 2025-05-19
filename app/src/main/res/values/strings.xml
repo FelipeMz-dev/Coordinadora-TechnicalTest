@@ -14,4 +14,6 @@
     <string name="copy_no_data_available">No data available</string>
     <string name="copy_input_processed_successfully">Input processed successfully</string>
     <string name="copy_logged_out_successfully">Logged out successfully</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

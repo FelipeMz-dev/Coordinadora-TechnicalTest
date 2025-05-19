@@ -1,18 +1,24 @@
 package com.coordinadora.technicaltest.ui.main;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.coordinadora.technicaltest.App;
+import com.coordinadora.technicaltest.QrScannerFragment;
 import com.coordinadora.technicaltest.R;
 import com.coordinadora.technicaltest.common.util.LiveDataUtils;
 import com.coordinadora.technicaltest.common.util.ResponseState;
@@ -61,7 +67,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void onClickListener() {
         binding.cameraButton.setOnClickListener(v -> {
-        });
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 101);
+                    } else {
+                        showQrScannerFragment();
+                    }
+                }
+        );
         binding.logoutButton.setOnClickListener(v -> viewModel.logout());
         binding.manualInput.setOnEditorActionListener((v, actionId, event) -> onManualInputSend(actionId));
     }
@@ -91,11 +104,29 @@ public class MainActivity extends AppCompatActivity {
                                 case LOGOUT:
                                     goToLogin();
                                     break;
-                                default: break;
+                                default:
+                                    break;
                             }
                         },
                         this::showToastError
                 );
+    }
+
+    private void showQrScannerFragment() {
+        binding.qrFragmentContainer.setVisibility(View.VISIBLE);
+
+        QrScannerFragment fragment = new QrScannerFragment(
+                result -> {
+                    binding.qrFragmentContainer.setVisibility(View.GONE);
+                    viewModel.processInput(result);
+                },
+                () -> binding.qrFragmentContainer.setVisibility(View.GONE)
+        );
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(binding.qrFragmentContainer.getId(), fragment)
+                .commit();
     }
 
     private void goToLogin() {
@@ -107,7 +138,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean onManualInputSend(int actionId) {
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
             String input = binding.manualInput.getText().toString().trim();
-            if (input.isEmpty()) binding.manualInput.setError(getString(R.string.copy_required_field));
+            if (input.isEmpty())
+                binding.manualInput.setError(getString(R.string.copy_required_field));
             else viewModel.processInput(input);
             return true;
         }
