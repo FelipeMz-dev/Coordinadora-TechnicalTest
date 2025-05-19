@@ -1,8 +1,10 @@
-package com.coordinadora.technicaltest.data.api;
+package com.coordinadora.technicaltest.data.api.service;
 
 import android.content.Context;
 
 import com.android.volley.Request;
+import com.coordinadora.technicaltest.data.api.ApiClient;
+import com.coordinadora.technicaltest.data.api.ApiConstants;
 import com.coordinadora.technicaltest.data.api.query.LoginQueryBuilder;
 import com.coordinadora.technicaltest.data.api.request.JsonObjectToArrayRequest;
 import com.coordinadora.technicaltest.common.util.ApiErrorHandler;
@@ -25,7 +27,7 @@ public class LoginService {
 
     public Single<Boolean> validateCredentials(String username, String password) {
         return Single.create(emitter -> {
-            String url = ApiConstants.BASE_URL + ApiConstants.DOCUMENTS_QUERY;
+            String url = ApiConstants.FIREBASE_URL + ApiConstants.DOCUMENTS_QUERY;
 
             JSONObject queryJson = LoginQueryBuilder.createUserPasswordQuery(username, password);
 
