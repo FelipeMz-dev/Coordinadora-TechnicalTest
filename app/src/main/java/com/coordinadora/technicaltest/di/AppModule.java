@@ -2,6 +2,14 @@ package com.coordinadora.technicaltest.di;
 
 import android.content.Context;
 
+import com.coordinadora.technicaltest.common.scheduler.AppSchedulerProvider;
+import com.coordinadora.technicaltest.common.scheduler.SchedulerProvider;
+import com.coordinadora.technicaltest.domain.usecase.ValidateUserUseCase;
+import com.coordinadora.technicaltest.domain.usecase.ValidateUserUseCaseImpl;
+import com.coordinadora.technicaltest.data.api.service.LoginService;
+import com.coordinadora.technicaltest.data.repository.UserRepository;
+import com.coordinadora.technicaltest.data.repository.UserRepositoryImpl;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -20,5 +28,11 @@ public class AppModule {
     @Provides
     Context provideContext() {
         return appContext;
+    }
+
+    @Provides
+    @Singleton
+    SchedulerProvider provideSchedulerProvider() {
+        return new AppSchedulerProvider();
     }
 }
