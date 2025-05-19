@@ -1,4 +1,4 @@
-package com.coordinadora.technicaltest;
+package com.coordinadora.technicaltest.ui.login.scanner;
 
 import android.os.Bundle;
 
@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.coordinadora.technicaltest.R;
 import com.google.zxing.client.android.BeepManager;
 import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;

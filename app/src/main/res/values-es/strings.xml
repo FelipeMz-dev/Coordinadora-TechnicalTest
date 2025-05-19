@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">TechnicalTest</string>
+    <string name="copy_user">Usuario</string>
+    <string name="copy_password">Contraseña</string>
+    <string name="copy_login">Iniciar sesión</string>
+    <string name="copy_unexpected_network_error">Error de red inesperado</string>
+    <string name="copy_no_internet_connection">Sin conexión a Internet</string>
+    <string name="copy_timeout_error">Error de tiempo de espera</string>
+    <string name="copy_unknown_error_json">Error desconocido (JSON)</string>
+    <string name="copy_required_field">Campo obligatorio</string>
+    <string name="copy_incorrect_username_or_password">Nombre de usuario o contraseña incorrectos</string>
+    <string name="copy_read_information">Leer información</string>
+    <string name="hint_manual_input">etiqueta1d-latitud-longitud-observacion</string>
+    <string name="copy_no_data_available">No hay datos disponibles</string>
+    <string name="copy_input_processed_successfully">Entrada procesada exitosamente</string>
+    <string name="copy_logged_out_successfully">Se cerró sesión correctamente</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="copy_require_location_permission">Se requiere permiso de ubicación</string>
+    <string name="copy_actual_location">Ubicación actual</string>
+    <string name="copy_destination">Destino</string>
+    <string name="copy_actual_location_disabled">La ubicación está desactivada</string>
+    <string name="copy_need_location_permission">Se necesita permiso de ubicación</string>
+    <string name="error_activate_gps">Error al activar GPS</string>
+    <string name="copy_location_unavailable">Ubicación no disponible</string>
+</resources>

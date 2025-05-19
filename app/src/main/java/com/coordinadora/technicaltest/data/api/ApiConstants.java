@@ -2,6 +2,7 @@ package com.coordinadora.technicaltest.data.api;
 
 public class ApiConstants {
     public static final String FIREBASE_URL = "https://firestore.googleapis.com/v1/projects/coordinadoratechnicaltest/databases/(default)/";
+    public static final String FIREBASE_URL_SHORT = "https://firestore.googleapis.com/v1/";
     public static final String VALIDATE_QR_ENDPOINT = "https://noderedtest.coordinadora.com/api/v1/validar";
     public static final String DOCUMENTS = "documents/";
     public static final String DOCUMENTS_QUERY = "documents:runQuery";
