@@ -1,4 +1,4 @@
-package com.coordinadora.technicaltest.ui.login.scanner;
+package com.coordinadora.technicaltest.ui.main.scanner;
 
 import android.os.Bundle;
 

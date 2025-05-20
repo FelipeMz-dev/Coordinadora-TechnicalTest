@@ -17,7 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.coordinadora.technicaltest.App;
-import com.coordinadora.technicaltest.ui.login.scanner.QrScannerFragment;
+import com.coordinadora.technicaltest.ui.main.scanner.QrScannerFragment;
 import com.coordinadora.technicaltest.R;
 import com.coordinadora.technicaltest.common.util.LiveDataUtils;
 import com.coordinadora.technicaltest.common.util.ResponseState;
@@ -31,6 +31,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
@@ -64,15 +66,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onClickListener() {
-        binding.cameraButton.setOnClickListener(v -> {
-                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 101);
-                    } else {
-                        showQrScannerFragment();
-                    }
-                }
-        );
+        binding.cameraButton.setOnClickListener(v -> showQrScannerFragment() );
         binding.logoutButton.setOnClickListener(v -> viewModel.logout());
         binding.manualInput.setOnEditorActionListener((v, actionId, event) -> onManualInputSend(actionId));
     }
@@ -111,6 +105,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showQrScannerFragment() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA},
+                    CAMERA_PERMISSION_REQUEST_CODE);
+        } else {
+            openQrScannerFragment();
+        }
+    }
+
+    private void openQrScannerFragment() {
         binding.qrFragmentContainer.setVisibility(View.VISIBLE);
 
         QrScannerFragment fragment = new QrScannerFragment(
@@ -154,5 +159,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void showToastError(String message) {
         Toast.makeText(getApplicationContext(), "Error: " + message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(
+            int requestCode,
+            @NonNull String[] permissions,
+            @NonNull int[] grantResults
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openQrScannerFragment();
+            }
+        }
     }
 }

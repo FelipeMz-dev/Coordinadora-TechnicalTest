@@ -17,7 +17,6 @@ import com.coordinadora.technicaltest.domain.usecase.UploadLastFiveBackupsUseCas
 import com.coordinadora.technicaltest.model.Backup;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
@@ -73,8 +72,10 @@ public class MainViewModel extends ViewModel {
                         .subscribe(
                                 backupList -> {
                                     if (backupList.isEmpty() && !logoutState)  loadRemoteBackups();
-                                    else _backups.setValue(backupList);
-                                    _state.setValue(ResponseState.success(MainStateType.LOAD_BACKUP));
+                                    else {
+                                        _backups.setValue(backupList);
+                                        _state.setValue(ResponseState.success(MainStateType.LOAD_BACKUP));
+                                    }
                                 },
                                 this::setErrorToState
                         )
